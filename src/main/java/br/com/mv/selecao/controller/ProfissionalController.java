@@ -1,8 +1,10 @@
 package br.com.mv.selecao.controller;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.mv.selecao.repository.ProfissionalRepository;
+
 import br.com.mv.selecao.exception.ResourceNotFoundException;
+
 import br.com.mv.selecao.model.Profissional;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -28,10 +32,12 @@ public class ProfissionalController {
 	@Autowired
 	private ProfissionalRepository profissionalRepository;
 	
+	
 	@GetMapping("/profissionais")
 	public List<Profissional> getAllProfissionais(){
 		return profissionalRepository.findAll();
 	}
+	
 	
 	@PostMapping("/profissionais")
 	public Profissional criarProfissional(@RequestBody Profissional profissional) {
@@ -76,6 +82,27 @@ public class ProfissionalController {
 		response.put("apagado", Boolean.TRUE);
 		return ResponseEntity.ok(response);
 	}
+	
+//	@GetMapping("/profissionais/{id}")
+//	public ModelAndView detalhesProfissional(@PathVariable("id") Long id) {
+//		Profissional profissional = profissionalRepository.findById(id)
+//				.orElseThrow(() -> new ResourceNotFoundException("Não foi encontrado um profissional com o id: " + id) );
+//		ModelAndView mv = new ModelAndView("profissional/detalhesProissional");
+//		mv.addObject("profissional",profissional);
+//		return mv;
+//	}
+//	
+//	@PostMapping("/profissionais/{id}")
+//	public String detalhesProfissional(@PathVariable("id") Long id, Estabelecimento estabelecimento ) {
+//		Profissional profissional = profissionalRepository.findById(id)
+//				.orElseThrow(() -> new ResourceNotFoundException("Não foi encontrado um profissional com o id: " + id) );
+//		estabelecimento.setProfissional(profissional);
+//		profissionalRepository.save(profissional);
+//		
+//		return "redirect:/{id}";
+//	}
+	
+	
 	
 
 }

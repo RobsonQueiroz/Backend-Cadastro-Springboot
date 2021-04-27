@@ -1,10 +1,14 @@
 package br.com.mv.selecao.model;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -12,11 +16,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="profissionais")
-public class Profissional {
+public class Profissional implements Serializable  {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
 	
 	@Column(name = "nome")
 	private String nome;
@@ -32,6 +39,9 @@ public class Profissional {
 	
 	@Column(name = "funcao")
 	private String funcao;
+	
+	@OneToMany
+	private List<Estabelecimento> estabelecimentos;
 	
 	public Profissional() {
 		

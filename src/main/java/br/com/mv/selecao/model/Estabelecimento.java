@@ -2,16 +2,19 @@ package br.com.mv.selecao.model;
 
 
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Estabelecimento {
+public class Estabelecimento implements Serializable  {
 	
-
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +25,17 @@ public class Estabelecimento {
 	private String endereco;
 	private String telefone;
 	
+	@ManyToOne
+	private Profissional profissional;
+	
+	public Profissional getProfissional() {
+		return profissional;
+	}
+
+	public void setProfissional(Profissional profissional) {
+		this.profissional = profissional;
+	}
+
 	public Estabelecimento() {}
 	
 	public Estabelecimento(String nome, String endereco, String telefone) {
@@ -55,12 +69,5 @@ public class Estabelecimento {
 		this.telefone = telefone;
 	}
 	
-	public String toString() {
-		return "Estabelecimento{"+
-				"id="+ id +
-				", nome='"+nome+'\''+
-				", endereco='"+endereco+'\''+
-				", telefone ='"+telefone+'\''+
-				'}';
-	}
+	
 }
